@@ -1,19 +1,17 @@
 // src/pages/Dashboard.js
-import React, { useEffect, useState } from 'react';
-import { fetchMemes } from '../api';
+import React from 'react';
 import { Grid, Card, Typography, Box } from '@mui/material';
+import { useMemes } from '../context/MemeContext';
+import MemeForm from '../components/MemeForm';
 
 const Dashboard = () => {
-  const [memes, setMemes] = useState([]);
-
-  useEffect(() => {
-    fetchMemes().then(response => setMemes(response.data));
-  }, []);
+  const { state } = useMemes();
 
   return (
     <Box p={2}>
+      <MemeForm />
       <Grid container spacing={2}>
-        {memes.map(meme => (
+        {state.memes.map(meme => (
           <Grid item xs={12} md={6} lg={4} key={meme.id}>
             <Card>
               <Typography variant="h5">{meme.title}</Typography>
