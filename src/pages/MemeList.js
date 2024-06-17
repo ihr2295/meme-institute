@@ -1,10 +1,12 @@
 // src/pages/MemeList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, CardMedia, CardContent, Typography, Grid } from '@mui/material';
+import { Card, CardMedia, CardContent, Typography, Grid, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const MemeList = () => {
   const [memes, setMemes] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMemes = async () => {
@@ -15,6 +17,11 @@ const MemeList = () => {
     fetchMemes();
   }, []);
 
+  const handleDelete = async (id) => {
+    await axios.delete(`http://127.0.0.1:8001/api/memes/${id}/`);
+    setMemes(memes.filter((meme) => meme.id !== id));
+  };
+
   return (
     <Grid container spacing={3}>
       {memes.map((meme) => (
@@ -24,6 +31,8 @@ const MemeList = () => {
             <CardContent>
               <Typography variant="h6">{meme.title}</Typography>
               <Typography variant="body2">{meme.description}</Typography>
+              <Button onClick={() => navigate(`/edit-meme/${meme.id}`)}>Edit</Button>
+              <Button onClick={() => handleDelete(meme.id)}>Delete</Button>
             </CardContent>
           </Card>
         </Grid>
