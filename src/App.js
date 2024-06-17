@@ -47,6 +47,9 @@ import { AuthProvider } from './context/AuthContext';
 import SignIn from 'layouts/authentication/sign-in';
 import SignUp from 'layouts/authentication/sign-up';
 
+//MemeList
+import MemeList from './pages/MemeList';
+
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -197,6 +200,14 @@ export default function App() {
   {getRoutes(routes)}
   <Route path="/login" element={<SignIn />} />
   <Route path="/register" element={<SignUp />} />
+  <Route path="*" element={<Navigate to="/dashboard" />} />
+</Routes>
+
+<Routes>
+  {getRoutes(routes)}
+  <Route path="/login" element={<SignIn />} />
+  <Route path="/register" element={<SignUp />} />
+  <Route path="/memes" element={<MemeList />} />
   <Route path="*" element={<Navigate to="/dashboard" />} />
 </Routes>
         </MemeProvider>
