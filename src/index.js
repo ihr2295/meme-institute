@@ -14,8 +14,10 @@ Coded by www.creative-tim.com
 */
 
 import React from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
+import { SnackbarProvider } from 'notistack';
+import App from './App';
 import App from "App";
 
 // Material Dashboard 2 React Context Provider
@@ -23,6 +25,13 @@ import { MaterialUIControllerProvider } from "context";
 
 const container = document.getElementById("app");
 const root = createRoot(container);
+
+ReactDOM.render(
+  <SnackbarProvider maxSnack={3}>
+    <App />
+  </SnackbarProvider>,
+  document.getElementById('root')
+);
 
 root.render(
   <BrowserRouter>
