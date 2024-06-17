@@ -53,6 +53,9 @@ import MemeList from './pages/MemeList';
 
 //AddMeme 
 import AddMeme from './pages/AddMeme';
+
+//EditMeme 
+import EditMeme from './pages/EditMeme';
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -222,7 +225,17 @@ export default function App() {
             <Route path="/add-meme" element={<AddMeme />} />
             <Route path="*" element={<Navigate to="/dashboard" />} />
           </Routes>
-          
+
+          <Routes>
+            {getRoutes(routes)}
+            <Route path="/login" element={<SignIn />} />
+            <Route path="/register" element={<SignUp />} />
+            <Route path="/memes" element={<MemeList />} />
+            <Route path="/add-meme" element={<AddMeme />} />
+            <Route path="/edit-meme/:id" element={<EditMeme />} />
+            <Route path="*" element={<Navigate to="/dashboard" />} />
+          </Routes>
+
         </MemeProvider>
       </AuthProvider>
     </ThemeProvider>
